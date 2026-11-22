@@ -12,6 +12,15 @@ from .hub import Hub, sse_events
 from .model import ExpectedPowerModel
 from .replay import load_replay, replay_loop
 from .schemas import Prediction, Reading
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Accept", "Content-Type", "Cache-Control"],
+)
 
 log = logging.getLogger("app")
 state: dict = {}
