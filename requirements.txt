@@ -6,3 +6,4 @@ pandas
 pydantic>=2
 pytest
 httpx
+scikit-learn
