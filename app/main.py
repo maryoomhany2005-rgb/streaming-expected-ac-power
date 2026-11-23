@@ -14,13 +14,6 @@ from .replay import load_replay, replay_loop
 from .schemas import Prediction, Reading
 from fastapi.middleware.cors import CORSMiddleware
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["Accept", "Content-Type", "Cache-Control"],
-)
 
 log = logging.getLogger("app")
 state: dict = {}
@@ -85,6 +78,15 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="TAYF Expected Power API", version="1.2.0",
               description="Normalized AC expected power for PVDAQ System 10 (NREL CIS-1), ML-A model (POA, module temp, ambient temp, time).",
               lifespan=lifespan)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Accept", "Content-Type", "Cache-Control"],
+)
 
 
 @app.get("/")
